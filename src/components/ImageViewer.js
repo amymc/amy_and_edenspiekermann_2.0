@@ -10,7 +10,8 @@ class ImageViewer extends React.Component {
     // initial state
     this.state = {
       imageItems: {},
-      filterItems: {}
+      filterItems: {},
+      isLoading: true
     }
     this.filterItems = this.filterItems.bind(this);
     this.separateTags = this.separateTags.bind(this);
@@ -46,7 +47,7 @@ class ImageViewer extends React.Component {
     //should i be doing it like this?
     this.setState({
       imageItems: filteredList,
-      filterItems: this.filterItems
+      filterItems: this.filterItems,
     });
   }
 
@@ -61,10 +62,13 @@ class ImageViewer extends React.Component {
     }
     this.setState({
       imageItems: imageItems,
-      filterItems: this.filterItems
+      filterItems: this.filterItems,
+      isLoading: false
     });
     console.log('newData', imageItems);
   }
+
+
 
 
   render() {
@@ -77,7 +81,7 @@ class ImageViewer extends React.Component {
           &lsaquo;Insert witty title here&rsaquo;
         </h1>
         <div id="js-image-items-wrapper">
-          <span className="loader">Loading</span>
+          {this.state.isLoading ? <span className="loader">Loading</span> : null}
           TEST {this.filterItems}
           {Object
             .keys(this.state.imageItems)
