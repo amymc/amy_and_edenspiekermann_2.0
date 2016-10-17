@@ -1,14 +1,33 @@
 import React from 'react';
+import Tag from './Tag';
 import {formatDate, splitString} from '../helpers';
 
 class InfoBlock extends React.Component {
   constructor() {
     super();
     this.filterItems = this.filterItems.bind(this);
+    this.separateTags = this.separateTags.bind(this);
+  }
+
+  componentDidMount() {
+   console.log('tags', this.props.details.tags);
+   this.separateTags();
   }
 
   filterItems() {
     console.log('filtering', this);
+  }
+
+  separateTags() {
+    let tagsArray = this.props.details.tags.split(' ');
+    this.props.details.tags = tagsArray;
+    console.log('details.tags', this.props.details.tags);
+    // for (var i=0; i < data.length; i++) {
+    //   var tagsArray = data[i].tags.split(' ');
+    //   data[i].tags = tagsArray;
+    // }
+    //this.data = data;
+    //this.renderItems(data);
   }
 
   render() {
@@ -20,7 +39,11 @@ class InfoBlock extends React.Component {
         <p className="image-item__info-block image-item__info-item js-author" onClick={this.filterItems}>{splitString(details.author)}</p>
         <p className="image-item__info-block">{formatDate(details.date_taken)}</p>
         <p className="image-item__info-block">
-         
+          Tags
+          {Object
+            .keys(details.tags)
+            .map(key => <Tag key={key} tags={details.tags}/>)
+          }
         </p>
       </div>
     )

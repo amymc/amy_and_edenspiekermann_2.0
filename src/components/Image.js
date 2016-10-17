@@ -7,9 +7,9 @@ class Image extends React.Component {
     this.lazyLoadImages = this.lazyLoadImages.bind(this);
   }
 
- componentDidMount() {
-  this.lazyLoadImages();
-  window.addEventListener('scroll', this.lazyLoadImages);
+  componentDidMount() {
+    this.lazyLoadImages();
+    window.addEventListener('scroll', this.lazyLoadImages);
   }
 
   componentWillUnmount() {
