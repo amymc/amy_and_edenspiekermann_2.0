@@ -9,10 +9,11 @@ class ImageViewer extends React.Component {
 
     // initial state
     this.state = {
-      imageItems: {}
+      imageItems: {},
+      filterItems: {}
     }
+    this.filterItems = this.filterItems.bind(this);
     this.separateTags = this.separateTags.bind(this);
-
   }
 
   componentDidMount() {
@@ -22,44 +23,58 @@ class ImageViewer extends React.Component {
      .then((response) => {
       return response.json();
     }).then((json) => {
-      // this.setState({
-      //   imageItems: json.items
-      // });
       this.separateTags(json.items);
-      console.log('imageItems', this.state.imageItems);
+    });
+    console.log('i am filter items', this.filterItems);
+  }
+
+  filterItems(filterItem) {
+    console.log('filtering!!', filterItem);
+
+    var filteredList = this.state.imageItems.filter(function (item) {
+     // if (type === 'author') {
+        return item.author_id === filterItem;
+     // }
+      //return item.tags.indexOf(filterItem) > -1;
+    });
+    console.log('filteredList', filteredList);
+
+    //should i be doing it like this?
+    this.setState({
+      imageItems: filteredList,
+      filterItems: this.filterItems
     });
   }
 
+  // filterItems(e) {
+  //   console.log('filtering', this.author, 'test', this.props.details);
+  //   e.preventDefault();
+
+  //   let dataFilterItem = this.author.getAttribute('data-filter-item');
+  //   // let filteredData = this.props.details.filter(function (item) {
+  //   //  // if (type === 'author') {
+  //   //     return item.author_id === dataFilterItem;
+  //   //  // }
+  //   //   //return item.tags.indexOf(filterItem) > -1;
+  //   // });
+
+  //   console.log('wtf', dataFilterItem === this.props.details.authorId);
+  // }
+
   //prepareData
   separateTags(items) {
-  //  console.log('items', items, items.tags);
-   // let imageItems = items;
-    // let tagsArray = items.tags.split(' ');
-    //let tagsArray;
-   // console.log('passed value', imageItems);
-    let imageItems = []; // = items.tags.split(' ');
+    let imageItems = [];
     for (let i = 0; i < items.length; i++) {
-      console.log('items[i]', items[i], items[i].tags);
       let tagsArray = items[i].tags.split(' ');
       imageItems.push(update(items[i], {
         tags: {$set: tagsArray}
       }));
     }
-    //console.log('tagsArray', tagsArray);
     this.setState({
-      imageItems: imageItems
+      imageItems: imageItems,
+      filterItems: this.filterItems
     });
-    // this.props.details.splitTags = tagsArray;
     console.log('newData', imageItems);
-    // console.log('newdata', newData);
-    // console.log('details.tags', this.props.details.tags);
-    // // for (var i=0; i < data.length; i++) {
-    // //   var tagsArray = data[i].tags.split(' ');
-    // //   data[i].tags = tagsArray;
-    // // }
-    // //this.data = data;
-    // //this.renderItems(data);
-    // console.log('test', (this.props.details.tags).map(key => this.props.details.tags[key]));
   }
 
 
@@ -74,9 +89,10 @@ class ImageViewer extends React.Component {
         </h1>
         <div id="js-image-items-wrapper">
           <span className="loader">Loading</span>
+          TEST {this.filterItems}
           {Object
             .keys(this.state.imageItems)
-            .map(key => <ImageItem key={key} details={this.state.imageItems[key]}/>)
+            .map(key => <ImageItem key={key} details={this.state.imageItems[key]} filterItems={this.filterItems.bind(this)}/>)
           }
         </div>
       </div>
@@ -85,5 +101,3 @@ class ImageViewer extends React.Component {
 }
 
 export default ImageViewer;
-
-//render(<ImageViewer/>, document.getElementById('image-viewer'));

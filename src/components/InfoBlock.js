@@ -6,18 +6,46 @@ import {formatDate, splitString} from '../helpers';
 class InfoBlock extends React.Component {
   constructor() {
     super();
-    this.filterItems = this.filterItems.bind(this);
     this.separateTags = this.separateTags.bind(this);
   }
 
   componentDidMount() {
-    console.log('tags', this.props.details.tags);
+    //console.log('props', this.props);
  //   this.separateTags();
   }
 
-  filterItems() {
-    console.log('filtering', this);
-  }
+  // filterItems(e) {
+  //   console.log('filtering', this.author, 'test', this.props.details);
+  //   e.preventDefault();
+
+  //   let dataFilterItem = this.author.getAttribute('data-filter-item');
+  //   // let filteredData = this.props.details.filter(function (item) {
+  //   //  // if (type === 'author') {
+  //   //     return item.author_id === dataFilterItem;
+  //   //  // }
+  //   //   //return item.tags.indexOf(filterItem) > -1;
+  //   // });
+
+  //   console.log('wtf', dataFilterItem === this.props.details.authorId);
+  // }
+
+    // Ctrl.prototype.filter = function filter(type, e) {
+  //   e.preventDefault();
+  //   var filterItem = $(e.currentTarget).attr("data-filter-item");
+  //   var authorName = $(e.currentTarget).attr("data-author-name");
+  //   var itemTitle = authorName ? authorName : filterItem;
+
+  //   var filteredData = this.data.filter(function (item) {
+  //     if (type === 'author') {
+  //       return item.author_id === filterItem;
+  //     }
+  //     return item.tags.indexOf(filterItem) > -1;
+  //   });
+
+  //   this.renderItems(filteredData);
+  //   this.updateUI(type, itemTitle);
+  // };
+
 
   separateTags() {
     let tagsArray = this.props.details.tags.split(' ');
@@ -39,11 +67,12 @@ class InfoBlock extends React.Component {
 
   render() {
     const {details} = this.props;
+    //const {filterItems} = this.props;
 
     return (
       <div className="image-item__info-wrapper">
         <h2 className="image-item__title">{details.title}</h2>
-        <p className="image-item__info-block image-item__info-item js-author" onClick={this.filterItems}>{splitString(details.author)}</p>
+        <p className="image-item__info-block image-item__info-item" ref={(p) => {this.author = p}} data-filter-item={details.author_id} data-author-name={splitString(details.author)} onClick={() => this.props.filterItems(details.author_id)}>{splitString(details.author)}</p>
         <p className="image-item__info-block">{formatDate(details.date_taken)}</p>
         <p className="image-item__info-block">
           Tags

@@ -21,7 +21,7 @@ class Image extends React.Component {
     // console.log('window', window.innerHeight);
     if (this.image.getBoundingClientRect().top < window.innerHeight) {
     //  console.log('img loaded', this.image, 'this.image.getBoundingClientRect().top', this.image.getBoundingClientRect().top);
-      let dataSrc = this.image.getAttribute('data-src')
+      let dataSrc = this.image.getAttribute('data-src');
       this.image.setAttribute('src', dataSrc);
       // $(image).parent().addClass('image-item__link--loaded');
     }

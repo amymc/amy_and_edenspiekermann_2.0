@@ -9,7 +9,7 @@ class ImageItem extends React.Component {
     return (
       <div className="image-item">
         <Image details={this.props.details}/>
-        <InfoBlock details={this.props.details}/>
+        <InfoBlock details={this.props.details} filterItems={this.props.filterItems}/>
       </div>
     )
   }
