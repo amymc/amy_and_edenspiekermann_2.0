@@ -8,7 +8,7 @@ class Tag extends React.Component {
 
   render() {
     return (
-      <span className="image-item__info-item">{this.props.tagName}</span>
+      <span className="image-item__info-item" onClick={(e) => this.props.filterItems(e, this.props.tagName)}>{this.props.tagName}</span>
     )
   }
 }

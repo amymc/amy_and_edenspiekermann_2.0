@@ -28,14 +28,18 @@ class ImageViewer extends React.Component {
     console.log('i am filter items', this.filterItems);
   }
 
-  filterItems(filterItem) {
-    console.log('filtering!!', filterItem);
+  filterItems(e, filterItem, type) {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('filtering!!', filterItem, 'e', e);
 
     var filteredList = this.state.imageItems.filter(function (item) {
-     // if (type === 'author') {
+      console.log('type', type, 'tags', item.tags);
+      if (type === 'author') {
         return item.author_id === filterItem;
-     // }
-      //return item.tags.indexOf(filterItem) > -1;
+      }
+      console.log('hey!', item.tags.indexOf(filterItem) > -1);
+      return item.tags.indexOf(filterItem) > -1;
     });
     console.log('filteredList', filteredList);
 
