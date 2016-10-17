@@ -1,4 +1,5 @@
 import React from 'react';
+import update from 'react-addons-update';
 import ImageItem from './ImageItem';
 import FetchJsonp from 'fetch-jsonp';
 
@@ -10,6 +11,8 @@ class ImageViewer extends React.Component {
     this.state = {
       imageItems: {}
     }
+    this.separateTags = this.separateTags.bind(this);
+
   }
 
   componentDidMount() {
@@ -19,12 +22,46 @@ class ImageViewer extends React.Component {
      .then((response) => {
       return response.json();
     }).then((json) => {
-      this.setState({
-        imageItems: json.items
-      });
+      // this.setState({
+      //   imageItems: json.items
+      // });
+      this.separateTags(json.items);
       console.log('imageItems', this.state.imageItems);
     });
   }
+
+  //prepareData
+  separateTags(items) {
+  //  console.log('items', items, items.tags);
+   // let imageItems = items;
+    // let tagsArray = items.tags.split(' ');
+    //let tagsArray;
+   // console.log('passed value', imageItems);
+    let imageItems = []; // = items.tags.split(' ');
+    for (let i = 0; i < items.length; i++) {
+      console.log('items[i]', items[i], items[i].tags);
+      let tagsArray = items[i].tags.split(' ');
+      imageItems.push(update(items[i], {
+        tags: {$set: tagsArray}
+      }));
+    }
+    //console.log('tagsArray', tagsArray);
+    this.setState({
+      imageItems: imageItems
+    });
+    // this.props.details.splitTags = tagsArray;
+    console.log('newData', imageItems);
+    // console.log('newdata', newData);
+    // console.log('details.tags', this.props.details.tags);
+    // // for (var i=0; i < data.length; i++) {
+    // //   var tagsArray = data[i].tags.split(' ');
+    // //   data[i].tags = tagsArray;
+    // // }
+    // //this.data = data;
+    // //this.renderItems(data);
+    // console.log('test', (this.props.details.tags).map(key => this.props.details.tags[key]));
+  }
+
 
   render() {
     return (

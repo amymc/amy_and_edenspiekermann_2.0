@@ -2,15 +2,13 @@ import React from 'react';
 
 class Tag extends React.Component {
 
-  componentDidMount() {
-   console.log('tags', this.props);
-  }
+  // componentDidMount() {
+  //  console.log('tag.js', this.props);
+  // }
 
   render() {
-    const {tags} = this.props;
-
     return (
-      <span className="image-item__info-item">{tags}</span>
+      <span className="image-item__info-item">{this.props.tagName}</span>
     )
   }
 }
