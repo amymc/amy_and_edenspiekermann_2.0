@@ -50,21 +50,6 @@ class ImageViewer extends React.Component {
     });
   }
 
-  // filterItems(e) {
-  //   console.log('filtering', this.author, 'test', this.props.details);
-  //   e.preventDefault();
-
-  //   let dataFilterItem = this.author.getAttribute('data-filter-item');
-  //   // let filteredData = this.props.details.filter(function (item) {
-  //   //  // if (type === 'author') {
-  //   //     return item.author_id === dataFilterItem;
-  //   //  // }
-  //   //   //return item.tags.indexOf(filterItem) > -1;
-  //   // });
-
-  //   console.log('wtf', dataFilterItem === this.props.details.authorId);
-  // }
-
   //prepareData
   separateTags(items) {
     let imageItems = [];
