@@ -1,12 +1,8 @@
 import React from 'react';
 import update from 'react-addons-update';
-//import { BrowserRouter, Match, Miss, hashHistory } from 'react-router';
-import {splitString} from '../helpers';
-//import history from 'history';
-
-//import {BrowserRouter, Router, Route} from 'react-router';
 // FetchJsonp adds JSONP support to the Fetch API
 import FetchJsonp from 'fetch-jsonp';
+import { splitString } from '../helpers';
 import ImageItem from './ImageItem';
 
 

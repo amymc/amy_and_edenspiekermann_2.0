@@ -26,8 +26,6 @@ class Image extends React.Component {
 
   render() {
     const {details} = this.props;
-   // const {details, index} = this.props;
-   // then available as this.props.details and this.props.index
 
     return (
       <div className="image-item__image-wrapper">
