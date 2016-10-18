@@ -1,6 +1,6 @@
 import React from 'react';
 import update from 'react-addons-update';
-import { BrowserRouter, Match, Miss, hashHistory } from 'react-router';
+//import { BrowserRouter, Match, Miss, hashHistory } from 'react-router';
 import {splitString} from '../helpers';
 
 //import {BrowserRouter, Router, Route} from 'react-router';
@@ -33,14 +33,15 @@ class ImageViewer extends React.Component {
     }).then((json) => {
       this.separateTags(json.items);
     });
-    console.log('i am filter items', this.filterItems);
   }
 
   filterItems(e, type, filterItem, filterItemAlias) {
     e.preventDefault();
     e.stopPropagation();
 
-    let filteredList = this.state.imageItems.filter(function (item) {
+ //   console.log('what are the images???????', this.originalList);
+
+    let filteredList = this.originalList.filter(function (item) {
       if (type === 'author') {
         return item.author_id === filterItem;
       }
@@ -66,20 +67,18 @@ class ImageViewer extends React.Component {
 
   //prepareData
   separateTags(items) {
-    let imageItems = [];
+    this.originalList = [];
     for (let i = 0; i < items.length; i++) {
       let tagsArray = items[i].tags.split(' ');
-      imageItems.push(update(items[i], {
+      this.originalList.push(update(items[i], {
         tags: {$set: tagsArray}
       }));
     }
-    console.log('this.filterItems', this.filterItems);
     this.setState({
-      imageItems: imageItems,
+      imageItems: this.originalList,
       filterItems: this.filterItems,
       isLoading: false
     });
-    console.log('newData', imageItems);
   }
 
   updateTitle(type, filterItem, filterItemAlias) {
@@ -93,8 +92,6 @@ class ImageViewer extends React.Component {
     }
     this.title.innerHTML = 'Filtered on ' + type + ':' + item;
   }
-
-
 
   render() {
     return (
