@@ -1,6 +1,7 @@
 import React from 'react';
 import update from 'react-addons-update';
 import { BrowserRouter, Match, Miss, hashHistory } from 'react-router';
+import {splitString} from '../helpers';
 
 //import {BrowserRouter, Router, Route} from 'react-router';
 // FetchJsonp adds JSONP support to the Fetch API
@@ -20,6 +21,7 @@ class ImageViewer extends React.Component {
     }
     this.filterItems = this.filterItems.bind(this);
     this.separateTags = this.separateTags.bind(this);
+    this.updateTitle = this.updateTitle.bind(this);
   }
 
   componentDidMount() {
@@ -34,11 +36,11 @@ class ImageViewer extends React.Component {
     console.log('i am filter items', this.filterItems);
   }
 
-  filterItems(e, filterItem, type) {
+  filterItems(e, type, filterItem, filterItemAlias) {
     e.preventDefault();
     e.stopPropagation();
 
-    var filteredList = this.state.imageItems.filter(function (item) {
+    let filteredList = this.state.imageItems.filter(function (item) {
       if (type === 'author') {
         return item.author_id === filterItem;
       }
@@ -55,6 +57,7 @@ class ImageViewer extends React.Component {
       filterItems: this.filterItems,
     });
 
+    this.updateTitle(type, filterItem, filterItemAlias);
     console.log('filterItem', filterItem, 'this.context.router', this.context.router);
 
    // this.context.router.transitionTo(url);
@@ -79,13 +82,24 @@ class ImageViewer extends React.Component {
     console.log('newData', imageItems);
   }
 
+  updateTitle(type, filterItem, filterItemAlias) {
+    let item;
+
+    console.log('this.title', this.title);
+    if (filterItemAlias) {
+      item = splitString(filterItemAlias);
+    } else {
+      item = filterItem;
+    }
+    this.title.innerHTML = 'Filtered on ' + type + ':' + item;
+  }
 
 
 
   render() {
     return (
         <div className="image-viewer__inner-wrapper">
-          <h1 id="js-image-viewer-title" className="image-viewer__title">
+          <h1 className="image-viewer__title" ref={(h1) => {this.title = h1}}>
             &lsaquo;Insert witty title here&rsaquo;
           </h1>
           <div id="js-image-items-wrapper">

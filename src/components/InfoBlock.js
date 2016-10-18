@@ -38,7 +38,7 @@ class InfoBlock extends React.Component {
     return (
       <div className="image-item__info-wrapper">
         <h2 className="image-item__title">{details.title}</h2>
-        <p className="image-item__info-block image-item__info-item" data-filter-item={details.author_id} data-author-name={splitString(details.author)} onClick={(e) => this.props.filterItems(e, details.author_id, 'author')}>{splitString(details.author)}</p>
+        <p className="image-item__info-block image-item__info-item" onClick={(e) => this.props.filterItems(e, 'author', details.author_id, details.author)}>{splitString(details.author)}</p>
         <p className="image-item__info-block">{formatDate(details.date_taken)}</p>
         <p className="image-item__info-block">
           Tags
