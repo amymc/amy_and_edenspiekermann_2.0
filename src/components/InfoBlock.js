@@ -4,33 +4,6 @@ import Tag from './Tag';
 import {formatDate, splitString} from '../helpers';
 
 class InfoBlock extends React.Component {
-  constructor() {
-    super();
-    this.separateTags = this.separateTags.bind(this);
-  }
-
-  componentDidMount() {
-    //console.log('props', this.props);
- //   this.separateTags();
-  }
-
-  separateTags() {
-    let tagsArray = this.props.details.tags.split(' ');
-    this.updatedItems = update(this.props.details, {
-      tags: {$set: tagsArray}
-    });
-    // this.props.details.splitTags = tagsArray;
-    console.log('oldData', this.updatedItems);
-    // console.log('newdata', newData);
-    // console.log('details.tags', this.props.details.tags);
-    // // for (var i=0; i < data.length; i++) {
-    // //   var tagsArray = data[i].tags.split(' ');
-    // //   data[i].tags = tagsArray;
-    // // }
-    // //this.data = data;
-    // //this.renderItems(data);
-    // console.log('test', (this.props.details.tags).map(key => this.props.details.tags[key]));
-  }
 
   render() {
     const {details} = this.props;

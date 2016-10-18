@@ -17,10 +17,7 @@ class Image extends React.Component {
   }
 
   lazyLoadImages() {
-    // console.log('lazy loading', this.image.getBoundingClientRect().top, 'scroll', window.scrollY);
-    // console.log('window', window.innerHeight);
     if (this.image.getBoundingClientRect().top < window.innerHeight) {
-    //  console.log('img loaded', this.image, 'this.image.getBoundingClientRect().top', this.image.getBoundingClientRect().top);
       let dataSrc = this.image.getAttribute('data-src');
       this.image.setAttribute('src', dataSrc);
       // $(image).parent().addClass('image-item__link--loaded');
