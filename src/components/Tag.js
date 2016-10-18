@@ -1,8 +1,15 @@
 import React from 'react';
+import Link from 'react-router/Link'
 
 const Tag = (props) => {
   return (
-    <span className="image-item__info-item" onClick={(e) => props.filterItems(e, 'tag', props.tagName)}>{props.tagName}</span>
+    <Link to={{
+          pathname: '/',
+          query: { tag: props.tagName }
+        }}>
+      <span className="image-item__info-item">{props.tagName}</span>
+    </Link>
+    
   )
 }
 
