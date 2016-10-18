@@ -1,7 +1,12 @@
 import React from 'react';
 import update from 'react-addons-update';
-import ImageItem from './ImageItem';
+import { BrowserRouter, Match, Miss, hashHistory } from 'react-router';
+
+//import {BrowserRouter, Router, Route} from 'react-router';
+// FetchJsonp adds JSONP support to the Fetch API
 import FetchJsonp from 'fetch-jsonp';
+import ImageItem from './ImageItem';
+
 
 class ImageViewer extends React.Component {
   constructor() {
@@ -32,23 +37,28 @@ class ImageViewer extends React.Component {
   filterItems(e, filterItem, type) {
     e.preventDefault();
     e.stopPropagation();
-    console.log('filtering!!', filterItem, 'e', e);
 
     var filteredList = this.state.imageItems.filter(function (item) {
-      console.log('type', type, 'tags', item.tags);
       if (type === 'author') {
         return item.author_id === filterItem;
       }
-      console.log('hey!', item.tags.indexOf(filterItem) > -1);
       return item.tags.indexOf(filterItem) > -1;
     });
-    console.log('filteredList', filteredList);
 
+    const url = `/${type}/${filterItem}/`
+    console.log('url', url);
+     this.context.router.transitionTo(url);
     //should i be doing it like this?
+    console.log('setting new state!');
     this.setState({
       imageItems: filteredList,
       filterItems: this.filterItems,
     });
+
+    console.log('filterItem', filterItem, 'this.context.router', this.context.router);
+
+   // this.context.router.transitionTo(url);
+    //this.props.location.query.t = key;
   }
 
   //prepareData
@@ -60,6 +70,7 @@ class ImageViewer extends React.Component {
         tags: {$set: tagsArray}
       }));
     }
+    console.log('this.filterItems', this.filterItems);
     this.setState({
       imageItems: imageItems,
       filterItems: this.filterItems,
@@ -73,24 +84,25 @@ class ImageViewer extends React.Component {
 
   render() {
     return (
-      <div className="image-viewer__inner-wrapper">
-        <button id="js-image-viewer-btn" className="image-viewer__btn image-viewer__btn--hidden">
-          &#x2190 Back
-        </button>
-        <h1 id="js-image-viewer-title" className="image-viewer__title">
-          &lsaquo;Insert witty title here&rsaquo;
-        </h1>
-        <div id="js-image-items-wrapper">
-          {this.state.isLoading ? <span className="loader">Loading</span> : null}
-          TEST {this.filterItems}
-          {Object
-            .keys(this.state.imageItems)
-            .map(key => <ImageItem key={key} details={this.state.imageItems[key]} filterItems={this.filterItems.bind(this)}/>)
-          }
+        <div className="image-viewer__inner-wrapper">
+          <h1 id="js-image-viewer-title" className="image-viewer__title">
+            &lsaquo;Insert witty title here&rsaquo;
+          </h1>
+          <div id="js-image-items-wrapper">
+            {this.state.isLoading ? <span className="loader">Loading</span> : null}
+            TEST {this.filterItems}
+            {Object
+              .keys(this.state.imageItems)
+              .map(key => <ImageItem key={key} details={this.state.imageItems[key]} filterItems={this.filterItems.bind(this)}/>)
+            }
+          </div>
         </div>
-      </div>
     )
   }
+}
+
+ImageViewer.contextTypes = {
+  router: React.PropTypes.object
 }
 
 export default ImageViewer;
