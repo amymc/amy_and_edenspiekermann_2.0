@@ -1,5 +1,7 @@
 import React from 'react';
 import update from 'react-addons-update';
+import Link from 'react-router/Link'
+
 import Tag from './Tag';
 import {formatDate, splitString} from '../helpers';
 
@@ -11,7 +13,13 @@ class InfoBlock extends React.Component {
     return (
       <div className="image-item__info-wrapper">
         <h2 className="image-item__title">{details.title}</h2>
-        <p className="image-item__info-block image-item__info-item" onClick={(e) => this.props.filterItems(e, 'author', details.author_id, details.author)}>{splitString(details.author)}</p>
+        <Link to={{
+              pathname: '/',
+              query: { author: splitString(details.author) }
+            }}
+            >
+          <p className="image-item__info-block image-item__info-item" >{splitString(details.author)}</p>
+        </Link>
         <p className="image-item__info-block">{formatDate(details.date_taken)}</p>
         <p className="image-item__info-block">
           Tags

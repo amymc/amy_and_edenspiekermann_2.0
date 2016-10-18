@@ -2,6 +2,7 @@ import React from 'react';
 import update from 'react-addons-update';
 //import { BrowserRouter, Match, Miss, hashHistory } from 'react-router';
 import {splitString} from '../helpers';
+//import history from 'history';
 
 //import {BrowserRouter, Router, Route} from 'react-router';
 // FetchJsonp adds JSONP support to the Fetch API
@@ -33,33 +34,57 @@ class ImageViewer extends React.Component {
     }).then((json) => {
       this.separateTags(json.items);
     });
+
+    // console.log('history', history);
+    // history.listen((location, action) => {
+    //   console.log(`The current URL is ${location.pathname}${location.search}${location.hash}`)
+    //   console.log(`The last navigation action was ${action}`)
+    // });
   }
 
-  filterItems(e, type, filterItem, filterItemAlias) {
-    e.preventDefault();
-    e.stopPropagation();
+  componentWillReceiveProps(nextProps){
+    //let currentUrl;
+    //
+    console.log('should!1', nextProps.location.search, 'current', this.currentQuery, nextProps);
+    if (nextProps.location.query && this.currentQuery !== nextProps.location.query) {
+      console.log('hey its not a match');
+      this.filterItems(nextProps.location.query);
 
- //   console.log('what are the images???????', this.originalList);
+    } 
+    this.currentQuery = nextProps.location.query;
+    console.log('this.currentUrl', this.currentQuery);
+    //console.log('should update', nextProps, this.state);
+    return true;
+}
+
+ // filterItems(e, type, filterItem, filterItemAlias) {
+    filterItems(queryObject) {
+     // console.log('filtering', queryObject, Object.keys(queryObject), Object.values(queryObject));
+
+
+      let type = Object.keys(queryObject)[0];
+      let filterItem = Object.values(queryObject)[0];
+    // e.preventDefault();
+    // e.stopPropagation();
+
 
     let filteredList = this.originalList.filter(function (item) {
+      console.log('type', type, type === 'author');
       if (type === 'author') {
-        return item.author_id === filterItem;
+        console.log('item.author', item.author);
+        return splitString(item.author) === filterItem;
       }
       return item.tags.indexOf(filterItem) > -1;
     });
 
-    const url = `/${type}/${filterItem}/`
-    console.log('url', url);
-     this.context.router.transitionTo(url);
-    //should i be doing it like this?
-    console.log('setting new state!');
+    console.log('setting new state!', filteredList);
     this.setState({
       imageItems: filteredList,
       filterItems: this.filterItems,
     });
 
-    this.updateTitle(type, filterItem, filterItemAlias);
-    console.log('filterItem', filterItem, 'this.context.router', this.context.router);
+    this.updateTitle(type, filterItem);
+    // console.log('filterItem', filterItem, 'this.context.router', this.context.router);
 
    // this.context.router.transitionTo(url);
     //this.props.location.query.t = key;
@@ -79,21 +104,24 @@ class ImageViewer extends React.Component {
       filterItems: this.filterItems,
       isLoading: false
     });
+        console.log('this.originalList', this.originalList);
+
   }
 
   updateTitle(type, filterItem, filterItemAlias) {
     let item;
 
     console.log('this.title', this.title);
-    if (filterItemAlias) {
-      item = splitString(filterItemAlias);
-    } else {
+    // if (filterItemAlias) {
+    //   item = splitString(filterItemAlias);
+    // } else {
       item = filterItem;
-    }
+    //}
     this.title.innerHTML = 'Filtered on ' + type + ':' + item;
   }
 
   render() {
+    console.log('render!!', this.state.imageItems);
     return (
         <div className="image-viewer__inner-wrapper">
           <h1 className="image-viewer__title" ref={(h1) => {this.title = h1}}>

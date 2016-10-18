@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import {render} from 'react-dom';
-import { BrowserRouter, Match, Miss, hashHistory } from 'react-router';
+import { BrowserHistory, BrowserRouter, Match, Miss, hashHistory } from 'react-router';
 // import {Router, Match, Route, hashHistory, useRouterHistory} from 'react-router';
-import {createHashHistory} from 'history';
+import history from 'history';
 
 
 import ImageViewer from './components/ImageViewer';
+
+
+// const listenToUrl = history.listen((location, action) => {
+//   // location is an object like window.location 
+//   console.log('url listening', action, location.pathname, location.state)
+// });
 
 // class Home extends Component {
 //     render(){
@@ -22,10 +28,9 @@ import ImageViewer from './components/ImageViewer';
 
 const App = () => {
   return (
-    <BrowserRouter history={hashHistory}>
+    <BrowserRouter history={history}>
       <div>
         <Match exactly pattern="/" component={ImageViewer} />
-        <Match pattern="/:type/:filterItem" component={ImageViewer} />
       </div>
     </BrowserRouter>
   )
