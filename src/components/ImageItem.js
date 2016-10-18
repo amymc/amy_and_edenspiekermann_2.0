@@ -2,17 +2,13 @@ import React from 'react';
 import Image from './Image';
 import InfoBlock from './InfoBlock';
 
-//CHANGE TO CONST??
-
-class ImageItem extends React.Component {
-  render() {
-    return (
-      <div className="image-item">
-        <Image details={this.props.details}/>
-        <InfoBlock details={this.props.details} filterItems={this.props.filterItems}/>
-      </div>
-    )
-  }
+const ImageItem = (props) =>  {
+  return (
+    <div className="image-item">
+      <Image details={props.details}/>
+      <InfoBlock details={props.details} filterItems={props.filterItems}/>
+    </div>
+  )
 }
 
 export default ImageItem;
