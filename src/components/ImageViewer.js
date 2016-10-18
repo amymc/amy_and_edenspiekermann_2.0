@@ -18,7 +18,6 @@ class ImageViewer extends React.Component {
     }
     this.filterItems = this.filterItems.bind(this);
     this.separateTags = this.separateTags.bind(this);
-    this.updateTitle = this.updateTitle.bind(this);
   }
 
   componentDidMount() {
@@ -39,30 +38,23 @@ class ImageViewer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    //let currentUrl;
-    //
-    console.log('should!1', nextProps.location.search, 'current', this.currentQuery, nextProps);
     if (nextProps.location.query && this.currentQuery !== nextProps.location.query) {
       console.log('hey its not a match');
       this.filterItems(nextProps.location.query);
-
-    } 
+    } else if (!nextProps.location.query) {
+      this.setState({
+        imageItems: this.originalList,
+        filterItems: this.filterItems
+      });
+      this.title.innerHTML = '&lsaquo;Insert witty title here&rsaquo;';
+    }
     this.currentQuery = nextProps.location.query;
-    console.log('this.currentUrl', this.currentQuery);
-    //console.log('should update', nextProps, this.state);
     return true;
-}
+  }
 
- // filterItems(e, type, filterItem, filterItemAlias) {
-    filterItems(queryObject) {
-     // console.log('filtering', queryObject, Object.keys(queryObject), Object.values(queryObject));
-
-
-      let type = Object.keys(queryObject)[0];
-      let filterItem = Object.values(queryObject)[0];
-    // e.preventDefault();
-    // e.stopPropagation();
-
+  filterItems(queryObject) {
+    let type = Object.keys(queryObject)[0];
+    let filterItem = Object.values(queryObject)[0];
 
     let filteredList = this.originalList.filter(function (item) {
       console.log('type', type, type === 'author');
@@ -79,11 +71,7 @@ class ImageViewer extends React.Component {
       filterItems: this.filterItems,
     });
 
-    this.updateTitle(type, filterItem);
-    // console.log('filterItem', filterItem, 'this.context.router', this.context.router);
-
-   // this.context.router.transitionTo(url);
-    //this.props.location.query.t = key;
+    this.title.innerHTML = 'Filtered on ' + type + ':' + filterItem;
   }
 
   //prepareData
@@ -100,20 +88,6 @@ class ImageViewer extends React.Component {
       filterItems: this.filterItems,
       isLoading: false
     });
-        console.log('this.originalList', this.originalList);
-
-  }
-
-  updateTitle(type, filterItem, filterItemAlias) {
-    let item;
-
-    console.log('this.title', this.title);
-    // if (filterItemAlias) {
-    //   item = splitString(filterItemAlias);
-    // } else {
-      item = filterItem;
-    //}
-    this.title.innerHTML = 'Filtered on ' + type + ':' + item;
   }
 
   render() {
