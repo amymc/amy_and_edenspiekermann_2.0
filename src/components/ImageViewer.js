@@ -5,6 +5,7 @@ import FetchJsonp from 'fetch-jsonp';
 import { splitString } from '../helpers';
 import ImageItem from './ImageItem';
 import '.././styles/modules/image-viewer.css';
+import '.././styles/modules/loader.css';
 
 class ImageViewer extends React.Component {
   constructor() {
@@ -82,10 +83,12 @@ class ImageViewer extends React.Component {
   render() {
     return (
         <div className="image-viewer__inner-wrapper">
-          <h1 className="image-viewer__title" ref={(h1) => {this.title = h1}}>
-            &lsaquo;Insert witty title here&rsaquo;
-          </h1>
-          <div class="image-items-wrapper">
+          <header className="image-viewer__header">
+            <h1 className="image-viewer__title" ref={(h1) => {this.title = h1}}>
+              &lsaquo;Insert witty title here&rsaquo;
+            </h1>
+          </header>
+          <div className="image-items-wrapper">
             {this.state.isLoading ? <span className="loader">Loading</span> : null}
             {Object
               .keys(this.state.imageItems)

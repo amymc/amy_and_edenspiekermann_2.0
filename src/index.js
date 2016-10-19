@@ -15,4 +15,4 @@ const App = () => {
   )
 }
 
- render(<App/>, document.getElementById('image-viewer'));
+ render(<App/>, document.getElementById('js-image-viewer'));
