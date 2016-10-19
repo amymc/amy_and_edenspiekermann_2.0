@@ -12,7 +12,6 @@ export function formatDate (context) {
 export function debounce(func, wait, immediate) {
   var timeout;
   return function() {
-    console.log('timeou', timeout);
     var context = this, args = arguments;
     var later = function() {
       timeout = null;
