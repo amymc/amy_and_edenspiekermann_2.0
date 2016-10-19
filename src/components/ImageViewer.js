@@ -32,7 +32,6 @@ class ImageViewer extends React.Component {
 
   componentWillReceiveProps(nextProps){
     if (nextProps.location.query && this.currentQuery !== nextProps.location.query) {
-      console.log('hey its not a match');
       this.filterItems(nextProps.location.query);
     } else if (!nextProps.location.query) {
       this.setState({
@@ -50,15 +49,12 @@ class ImageViewer extends React.Component {
     let filterItem = Object.values(queryObject)[0];
 
     let filteredList = this.originalList.filter(function (item) {
-      console.log('type', type, type === 'author');
       if (type === 'author') {
-        console.log('item.author', item.author);
         return splitString(item.author) === filterItem;
       }
       return item.tags.indexOf(filterItem) > -1;
     });
 
-    console.log('setting new state!', filteredList);
     this.setState({
       imageItems: filteredList,
       filterItems: this.filterItems,
@@ -84,13 +80,12 @@ class ImageViewer extends React.Component {
   }
 
   render() {
-    console.log('render!!', this.state.imageItems);
     return (
         <div className="image-viewer__inner-wrapper">
           <h1 className="image-viewer__title" ref={(h1) => {this.title = h1}}>
             &lsaquo;Insert witty title here&rsaquo;
           </h1>
-          <div id="js-image-items-wrapper">
+          <div>
             {this.state.isLoading ? <span className="loader">Loading</span> : null}
             TEST {this.filterItems}
             {Object

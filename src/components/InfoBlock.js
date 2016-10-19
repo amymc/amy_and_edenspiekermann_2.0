@@ -1,5 +1,4 @@
 import React from 'react';
-import update from 'react-addons-update';
 import Link from 'react-router/Link'
 
 import Tag from './Tag';

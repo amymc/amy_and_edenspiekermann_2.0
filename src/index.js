@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Match } from 'react-router';
 import ImageViewer from './components/ImageViewer';
