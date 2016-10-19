@@ -9,7 +9,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div>
-        <Match exactly pattern="/" component={ImageViewer} />
+        <Match exactly pattern="/build/" component={ImageViewer} />
       </div>
     </BrowserRouter>
   )
