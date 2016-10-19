@@ -21,14 +21,12 @@ class ImageBlock extends React.Component {
   }
 
   lazyLoadImages() {
-    console.log('lazy!!');
     // add 100 - hack to account for the src placeholder gifs 
     // before images are loaded the gifs take up more height than the final images
     // so browser thinks images aren't in view 
     if (this.image.getBoundingClientRect().top < window.innerHeight + 100) {
       let dataSrc = this.image.getAttribute('data-src');
       this.image.setAttribute('src', dataSrc);
-      console.log('pn', this.image.parentNode, 'cl', this.image.parentNode.className);
       this.image.parentNode.classList.add("image-item__link--loaded");
     }
   }
