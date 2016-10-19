@@ -1,8 +1,8 @@
 import React from 'react';
 import { debounce } from '../helpers';
+import '.././styles/modules/image-block.css';
 
-
-class Image extends React.Component {
+class ImageBlock extends React.Component {
 
   constructor() {
     super();
@@ -46,4 +46,4 @@ class Image extends React.Component {
   }
 }
 
-export default Image;
+export default ImageBlock;

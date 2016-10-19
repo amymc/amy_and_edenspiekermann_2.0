@@ -39,27 +39,6 @@
   width: calc(100% - 78px);
 }
 
-.image-viewer__btn {
-  float: left;
-  left: 0;
-  cursor: pointer;
-  border: 2px solid #ff4350;
-  background-color: #ff4350;
-  color: #fff;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.image-viewer__btn:hover,
-.image-viewer__btn:focus {
-  background-color: #fff;
-  color: #ff4350;
-}
-
-.image-viewer__btn--hidden {
-  display: none;
-}
-
 .image-items-wrapper {
   margin-top: 80px;
   padding-top: 20px;

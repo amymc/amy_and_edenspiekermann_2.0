@@ -1,0 +1,33 @@
+.image-item__info-block {
+  padding: 20px 0;
+}
+
+.image-item__info-row {
+    margin-top: 15px;
+  }
+
+.image-item__title {
+    font-size: 1.8rem;
+  }
+
+.image-item__info-item {
+  display: inline-block;
+  cursor: pointer;
+  color: #ff4350;
+  border-bottom: 2px solid #ff4350;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.image-item__info-item:hover,
+.image-item__info-item:focus {
+  color: #000;
+  border-bottom: 2px solid #000;
+}
+
+@media (min-width: 600px) {
+  .image-item__info-block {
+    width: 60%;
+    padding: 0 0 0 20px;
+  }
+}
