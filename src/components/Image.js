@@ -1,22 +1,27 @@
 import React from 'react';
+import { debounce } from '../helpers';
+
 
 class Image extends React.Component {
 
   constructor() {
     super();
-    this.lazyLoadImages = this.lazyLoadImages.bind(this);
+    this.lazyLoadImages = debounce(this.lazyLoadImages.bind(this, 250));
   }
 
   componentDidMount() {
     this.lazyLoadImages();
     window.addEventListener('scroll', this.lazyLoadImages);
+    window.addEventListener('resize', this.lazyLoadImages);
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.lazyLoadImages);
+    window.removeEventListener("resize", this.lazyLoadImages);
   }
 
   lazyLoadImages() {
+    console.log('lazy!!');
     // add 100 - hack to account for the src placeholder gifs 
     // before images are loaded the gifs take up more height than the final images
     // so browser thinks images aren't in view 
