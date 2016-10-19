@@ -2,7 +2,7 @@
   "name": "amy_and_edenspiekermann",
   "version": "2.0.0",
   "private": true,
-  "homepage": "http://www.amymccarthy.co/amy_and_edenspiekermann_2.0/build/",
+  "homepage": "http://www.amymccarthy.co/amy_and_edenspiekermann_2.0/",
   "devDependencies": {
     "css-loader": "^0.25.0",
     "fetch-jsonp": "^1.0.2",
