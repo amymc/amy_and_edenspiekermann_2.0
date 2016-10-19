@@ -3,6 +3,7 @@ import Link from 'react-router/Link'
 
 import Tag from './Tag';
 import {formatDate, splitString} from '../helpers';
+//import '.././styles/modules/image-item.css';
 
 class InfoBlock extends React.Component {
 

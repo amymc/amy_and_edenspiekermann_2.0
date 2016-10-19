@@ -4,7 +4,7 @@ import update from 'react-addons-update';
 import FetchJsonp from 'fetch-jsonp';
 import { splitString } from '../helpers';
 import ImageItem from './ImageItem';
-
+import '.././styles/modules/image-viewer.css';
 
 class ImageViewer extends React.Component {
   constructor() {
@@ -85,9 +85,8 @@ class ImageViewer extends React.Component {
           <h1 className="image-viewer__title" ref={(h1) => {this.title = h1}}>
             &lsaquo;Insert witty title here&rsaquo;
           </h1>
-          <div>
+          <div class="image-items-wrapper">
             {this.state.isLoading ? <span className="loader">Loading</span> : null}
-            TEST {this.filterItems}
             {Object
               .keys(this.state.imageItems)
               .map(key => <ImageItem key={key} details={this.state.imageItems[key]} filterItems={this.filterItems.bind(this)}/>)

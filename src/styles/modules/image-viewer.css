@@ -1,0 +1,77 @@
+.image-viewer {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 14px;
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-viewer__inner-wrapper {
+  position: relative;
+  margin: 16px;
+  overflow: hidden;
+}
+
+.image-viewer__header {
+  position: fixed;
+  max-width: 1140px;
+  margin: 0 16px;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  padding: 30px 0;
+  box-shadow: 0 1px 0 #ccc;
+  background-color: #fff;
+}
+
+.image-viewer__title {
+  float: left;
+  color: #ff4350;
+  font-size: 20px;
+  text-align: center;
+  line-height: 2.6rem;
+  width: 100%;
+}
+
+.image-viewer__title--narrow {
+  /*68px = width of image-viewer__btn*/
+  width: calc(100% - 78px);
+}
+
+.image-viewer__btn {
+  float: left;
+  left: 0;
+  cursor: pointer;
+  border: 2px solid #ff4350;
+  background-color: #ff4350;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.image-viewer__btn:hover,
+.image-viewer__btn:focus {
+  background-color: #fff;
+  color: #ff4350;
+}
+
+.image-viewer__btn--hidden {
+  display: none;
+}
+
+.image-items-wrapper {
+  margin-top: 80px;
+  padding-top: 20px;
+}
+
+@media (min-width: 1140px) {
+  .image-viewer__inner-wrapper {
+    margin: 16px 0;
+  }
+
+  .image-viewer__header {
+    margin: 0 auto;
+  }
+}
+

@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from './Image';
 import InfoBlock from './InfoBlock';
+import '.././styles/modules/image-item.css';
 
 const ImageItem = (props) =>  {
   return (
